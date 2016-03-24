@@ -1,3 +1,41 @@
+#vim
+[submodule "vim/bundle/FuzzyFinder"]
+  path = vim/bundle/FuzzyFinder
+  url = https://github.com/vim-scripts/FuzzyFinder.git
+[submodule "vim/bundle/L9"]
+  path = vim/bundle/L9
+  url = https://github.com/vim-scripts/L9.git
+[submodule "vim/bundle/ack.vim"]
+  url= https://github.com/mileszs/ack.vim.git
+  path= vim/bundle/ack.vim
+[submodule "vim/bundle/vim-coffee-script"]
+   url= https://github.com/kchmck/vim-coffee-script.git
+    path= vim/bundle/vim-coffee-script
+[submodule "vim/bundle/vim-dockefile"]
+   url= https://github.com/ekalinin/Dockerfile.vim.git
+    path= vim/bundle/vim-dockefile
+[submodule "vim/bundle/vim-fugitive"]
+   url= https://github.com/tpope/vim-fugitive.git
+    path= vim/bundle/vim-fugitive
+[submodule "vim/bundle/vim-rails"]
+   url= https://github.com/tpope/vim-rails.git
+    path= vim/bundle/vim-rails
+[submodule "vim/bundle/vim-rake"]
+   url= https://github.com/tpope/vim-rake.git
+    path= vim/bundle/vim-rake
+[submodule "vim/bundle/vim-ruby-fold"]
+   url= https://github.com/bruno-/vim-ruby-fold.git
+    path= vim/bundle/vim-ruby-fold
+[submodule "vim/bundle/vim-ruby-run"]
+   url= https://github.com/stjernstrom/vim-ruby-run.git
+    path= vim/bundle/vim-ruby-run
+[submodule "vim/bundle/vim-textobj-rubyblock"]
+   url= https://github.com/nelstrom/vim-textobj-rubyblock.git
+    path= vim/bundle/vim-textobj-rubyblock
+[submodule "vim/bundle/vim-textobj-user"]
+  url= https://github.com/kana/vim-textobj-user.git
+  path= vim/bundle/vim-textobj-user
+
 [submodule ".submodules/gitstats"]
 	path = .submodules/gitstats
 	url = https://github.com/hoxu/gitstats.git
