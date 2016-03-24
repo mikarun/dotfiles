@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 # Time-stamp: <Thu 2016-03-03 15:43 svarrette>
 ################################################################################
-#      _____     _ _              _           _       _    __ _ _
-#     |  ___|_ _| | | _____  _ __( )___    __| | ___ | |_ / _(_) | ___  ___
-#     | |_ / _` | | |/ / _ \| '__|// __|  / _` |/ _ \| __| |_| | |/ _ \/ __|
-#     |  _| (_| | |   < (_) | |    \__ \ | (_| | (_) | |_|  _| | |  __/\__ \
-#     |_|  \__,_|_|_|\_\___/|_|    |___/  \__,_|\___/ \__|_| |_|_|\___||___/
-#
+# ___  ____ _                          _           _       _    __ _ _           
+# |  \/  (_) |                        ( )         | |     | |  / _(_) |          
+# | .  . |_| | ____ _ _ __ _   _ _ __ |/ ___    __| | ___ | |_| |_ _| | ___  ___ 
+# | |\/| | | |/ / _` | '__| | | | '_ \  / __|  / _` |/ _ \| __|  _| | |/ _ \/ __|
+# | |  | | |   < (_| | |  | |_| | | | | \__ \ | (_| | (_) | |_| | | | |  __/\__ \
+# \_|  |_/_|_|\_\__,_|_|   \__,_|_| |_| |___/  \__,_|\___/ \__|_| |_|_|\___||___/
+#                                                                                
 ################################################################################
-# Installation script for Falkor aka S.Varrette's dotfiles within the homedir of the
+# Installation script for mikarun aka Mickael Gerard's dotfiles within the homedir of the
 # user running this script.
-# Adapted from the install script set for [ULHPC/dotfiles](https://github.com/ULHPC/dotfiles)
+# Adapted from the install script set for [Falkor/dotfiles](https://github.com/Falkor/dotfiles)
 
 #set -x # Debug
 
@@ -72,8 +73,8 @@ print_error_and_exit() {
 }
 print_version() {
     cat <<EOF
-This is Falkor/dotfiles/$COMMAND version "$VERSION".
-Copyright (c) 2011-2016 Sebastien Varrette  (sebastien.varrette@uni.lu)
+This is mikarun/dotfiles/$COMMAND version "$VERSION".
+Copyright (c) 2011-2016 issued from Sebastien Varrette  (sebastien.varrette@uni.lu)
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 EOF
@@ -81,7 +82,7 @@ EOF
 print_help() {
     less <<EOF
 NAME
-    $COMMAND -- install (or remove) Falkor's dotfiles in the current user's homedir
+    $COMMAND -- install (or remove) mikarun's dotfiles in the current user's homedir
 
 SYNOPSIS
     $COMMAND [-V | -h]
@@ -108,19 +109,19 @@ OPTIONS
     --offline
         Proceed in offline mode (assuming you have already cloned the repository)
     --all -a
-        Install / delete ALL Falkor's dotfiles
+        Install / delete ALL mikarun's dotfiles
     --bash --with-bash
-        Falkor's Bourne-Again shell (Bash) configuration ~/.bashrc
+        mikarun's Bourne-Again shell (Bash) configuration ~/.bashrc
     --zsh --with-zsh
-        Falkor's ZSH / Oh-My-ZSH configuration ~/.oh-my-zsh/ ~/.zshrc
+        mikarun's ZSH / Oh-My-ZSH configuration ~/.oh-my-zsh/ ~/.zshrc
     --emacs --with-emacs
-        Falkor's Emacs configuration ~/.emacs ~/.emacs.d/
+        mikarun's Emacs configuration ~/.emacs ~/.emacs.d/
     --vim --with-vim
-        Falkor's VIM configuration ~/.vimrc
+        mikarun's VIM configuration ~/.vimrc
     --git --with-git
-        Falkor's Git configuration ~/.gitconfig[.local]
+        mikarun's Git configuration ~/.gitconfig[.local]
     --screen --with-screen
-        Falkor's GNU Screen configuration ~/.screenrc
+        mikarun's GNU Screen configuration ~/.screenrc
 
 EXAMPLES
 
@@ -131,11 +132,11 @@ EXAMPLES
         $COMMAND [--delete] --zsh --vim --git --screen
 
 AUTHOR
-    Falkor aka Sebastien Varrette (sebastien.varrette@uni.lu)
+    mikarun aka Mickael Gerard 
 
 REPORTING BUGS
     Please report bugs using the Issue Tracker of the project:
-       <https://github.com/Falkor/dotfiles/issues>
+       <https://github.com/mikarun/dotfiles/issues>
 
 COPYRIGHT
     This is free software; see the source for copying conditions.  There is
@@ -274,7 +275,7 @@ install_ohmyzsh() {
 }
 
 install_custom_ohmyzsh() {
-    info "installing Falkor custom plugins for oh-my-zsh/"
+    info "installing mikarun custom plugins for oh-my-zsh/"
     local customdir="$HOME/.oh-my-zsh/custom/"
     local falkor_customdir="${DOTFILES}/oh-my-zsh/custom"
     [ ! -h "${customdir}/.ref" ] && execute "ln -s ${falkor_customdir} ${customdir}/.ref"
@@ -342,7 +343,7 @@ setup_gitconfig_local () {
 #        (_)__, |_|\__\___\___/|_| |_|_| |_|\__, (_)_|\___/ \___\__,_|_|
 #          |___/                            |___/
 #
-# See also: http://github.com/Falkor/dotfiles
+# See also: http://github.com/mikarun/dotfiles
 ################################################################################
 EOF
 
@@ -418,12 +419,12 @@ if [ $greprc -ne 0 ]; then
     warning "Assume dotfiles directory '${DOTFILES}' is relative to the home directory"
     DOTFILES="$HOME/${DOTFILES}"
 fi
-info "About to ${ACTION} Falkor's dotfiles from ${DOTFILES}"
+info "About to ${ACTION} mikarun's dotfiles from ${DOTFILES}"
 [ -z "${FORCE}" ] && really_continue
 
 if [ "${SCRIPTDIR}" != "${DOTFILES}" ]; then
     if [ -d "${SCRIPTDIR}/.git" -a ! -e "${DOTFILES}" ]; then
-        # We are (hopefully) in a clone of the Falkor's dotfile repository.
+        # We are (hopefully) in a clone of the mikarun's dotfile repository.
         # Make $DOTFILES be a symlink to this clone.
         info "make '${DOTFILES}' a symlink to ${SCRIPTDIR}"
         execute "ln -s ${SCRIPTDIR} ${DOTFILES}"
@@ -433,7 +434,7 @@ fi
 # Update the repository if already present
 [[ -z "${OFFLINE}" && -d "${DOTFILES}" ]]   && execute "( cd ${DOTFILES} ; git pull )"
 # OR clone it there
-[[ ! -d "${DOTFILES}" ]] && execute "git clone -q --recursive --depth 1 https://github.com/Falkor/dotfiles.git ${DOTFILES}"
+[[ ! -d "${DOTFILES}" ]] && execute "git clone -q --recursive --depth 1 https://github.com/mikarun/dotfiles.git ${DOTFILES}"
 
 cd ~
 
@@ -449,17 +450,17 @@ fi
 
 ## Bash
 if [ -n "${WITH_BASH}" ]; then
-    info "${ACTION} Falkor's Bourne-Again shell (Bash) configuration ~/.bashrc ~/.inputrc ~/.bash_profile"
+    info "${ACTION} mikarun's Bourne-Again shell (Bash) configuration ~/.bashrc ~/.inputrc ~/.bash_profile"
     add_or_remove_link "${DOTFILES}/bash/.bashrc"       ~/.bashrc
     add_or_remove_link "${DOTFILES}/bash/.inputrc"      ~/.inputrc
     add_or_remove_link "${DOTFILES}/bash/.bash_profile" ~/.bash_profile
-    info "add custom aliases from Falkor's Oh-My-ZSH plugin (made compatible with bash) ~/.bash_aliases"
+    info "add custom aliases from mikarun's Oh-My-ZSH plugin (made compatible with bash) ~/.bash_aliases"
     add_or_remove_link "${DOTFILES}/oh-my-zsh/custom/plugins/falkor/falkor.plugin.zsh"  ~/.bash_aliases
 fi
 
 ## Zsh
 if [ -n "${WITH_ZSH}" ]; then
-    info "${ACTION} Falkor's ZSH / Oh-My-ZSH configuration ~/.oh-my-zsh/ ~/.zshrc"
+    info "${ACTION} mikarun's ZSH / Oh-My-ZSH configuration ~/.oh-my-zsh/ ~/.zshrc"
     if [ "${MODE}" != "--delete" ]; then
         install_ohmyzsh
         install_custom_ohmyzsh
@@ -473,16 +474,16 @@ fi
 
 ## GNU Emacs
 if [ -n "${WITH_EMACS}" ]; then
-    info "${ACTION} Falkor's Emacs configuration ~/.emacs ~/.emacs.d"
+    info "${ACTION} mikarun's Emacs configuration ~/.emacs ~/.emacs.d"
     warning "For performance reason, make this installation independently following instructions on"
-    warning "    https://github.com/Falkor/emacs-config2 "
+    warning "    https://github.com/mikarun/emacs-config2 "
     # add_or_remove_link   $DOTFILES/emacs     ~/.emacs.d
     # add_or_remove_link   ~/.emacs.d/.emacs   ~/.emacs
 fi
 
 ## VI iMproved ([m]Vim)
 if [ -n "${WITH_VIM}" ]; then
-    info "${ACTION} Falkor's VIM configuration ~/.vimrc"
+    info "${ACTION} mikarun's VIM configuration ~/.vimrc"
     add_or_remove_link "${DOTFILES}/vim/.vimrc" ~/.vimrc
     if  [ "${MODE}" != "--delete" ]; then
         warning "Run vim afterwards to download the expected package (using NeoBundle)"
@@ -495,7 +496,7 @@ fi
 
 ## Git
 if [ -n "${WITH_GIT}" ]; then
-    info "${ACTION} Falkor's Git configuration ~/.gitconfig[.local]"
+    info "${ACTION} mikarun's Git configuration ~/.gitconfig[.local]"
     add_or_remove_link "${DOTFILES}/git/.gitconfig" ~/.gitconfig
     if [ "${MODE}" != "--delete" ]; then
         setup_gitconfig_local  ~/.gitconfig.local
