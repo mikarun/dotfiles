@@ -35,13 +35,14 @@ COLOR_BACK="\033[0m"
 ### Local variables
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-DOTFILES=~/.dotfiles.falkor.d
+DOTFILES=~/dotfiles
 
 # What to take care of (default is empty)
 WITH_BASH=""
 WITH_ZSH=""
 WITH_EMACS=""
 WITH_VIM=""
+WITH_TMUX=""
 WITH_GIT=""
 WITH_SCREEN=""
 
@@ -402,13 +403,15 @@ while [ $# -ge 1 ]; do
         --with-vim   | --vim)    WITH_VIM='--with-vim';;
         --with-git   | --git)    WITH_GIT='--with-git';;
         --with-screen| --screen) WITH_SCREEN='--with-screen';;
+        --with-tmux| --tmux) WITH_TMUX='--with-tmux';;
         -a | --all)
             WITH_BASH='--with-bash';
             WITH_ZSH='--with-zsh';
             WITH_EMACS='--with-emacs';
             WITH_VIM='--with-vim';
             WITH_GIT='--with-git';
-            WITH_SCREEN='--with-screen';;
+            WITH_SCREEN='--with-screen';
+            WITH_TMUX='--with-tmux';;
     esac
     shift
 done
@@ -438,7 +441,7 @@ fi
 
 cd ~
 
-if [ -z "${WITH_BASH}${WITH_ZSH}${WITH_EMACS}${WITH_VIM}${WITH_GIT}${WITH_SCREEN}" ]; then
+if [ -z "${WITH_BASH}${WITH_ZSH}${WITH_EMACS}${WITH_VIM}${WITH_GIT}${WITH_SCREEN}${WITH_TMUX}" ]; then
     warning " "
     warning "By default, this installer does nothing except updating ${DOTFILES}."
     warning "Use '$0 --all' to install all available configs. OR use a discrete set of options."
@@ -493,6 +496,15 @@ if [ -n "${WITH_VIM}" ]; then
         fi
     fi
 fi
+
+## Tmux
+if [ -n "${WITH_TMUX}" ]; then
+    info "${ACTION} mikarun's Tmux configuration ~/.tmux.conf"
+    add_or_remove_link "${DOTFILES}/tmux/.tmux.conf" ~/.tmux.conf
+    info "${ACTION} mikarun's Tmuxinator configuration ~/.config/tmuxinator"
+    add_or_remove_link "${DOTFILES}/tmux/tmuxinator" ~/.config/tmuxinator
+fi
+
 
 ## Git
 if [ -n "${WITH_GIT}" ]; then

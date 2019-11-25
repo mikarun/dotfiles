@@ -44,6 +44,7 @@ set ruler
 set backspace=indent,eol,start
 set laststatus=2
 set number
+" set noballooneval
 "set relativenumber
 "set undofile
 set cpoptions+=$
@@ -55,7 +56,12 @@ set cpoptions+=$
 "set winheight=999
 
 "colorscheme solarized
-set background=light " or dark
+set background=dark
+colorscheme codeschool
+
+
+hi ColorColumn  cterm=NONE ctermbg=235
+hi EndOfBuffer  cterm=NONE ctermbg=235
 
 set splitbelow splitright
 "  ---------------------------------------------------------------------------
@@ -78,6 +84,13 @@ set tags:tags,./tmp/tags;
 "  set colorcolumn=80
 "endif
 
+"  ---------------------------------------------------------------------------
+"  File browsing
+"  ---------------------------------------------------------------------------
+let g:netrw_banner=0 "disable banner
+let g:netrw_browses_split=4 " open in prior window
+let g:netrw_altv=1 " opens split to the right
+let g:netrw_liststyle=3 " tree view
 "  ---------------------------------------------------------------------------
 "  Status Line
 "  ---------------------------------------------------------------------------
@@ -123,6 +136,10 @@ set hlsearch
 nmap n nzz
 nmap N Nzz
 
+
+" fzf config
+set rtp+=/usr/local/opt/fzf
+
 " ACK
 set grepprg=ack
 
@@ -130,6 +147,11 @@ set grepprg=ack
 nnoremap <leader>a :Ack 
 
 " Ack settings: https://github.com/krisleech/vimfiles/wiki/Make-ack-ignore-files
+
+" show/ hide cursor line
+hi CursorLine   cterm=NONE ctermbg=235
+hi CursorColumn cterm=NONE ctermbg=235
+nnoremap <leader>x :set cursorline! cursorcolumn!
 
 " Edit/View files relative to current directory
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
@@ -143,17 +165,26 @@ set wildignore=.svn,CVS,.git,*.swp,*.jpg,*.png,*.gif,*.pdf,*.bak
 "  ---------------------------------------------------------------------------
 "  Plugins
 "  ---------------------------------------------------------------------------
+"#UltiSnip
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+"let g:UltiSnipsSnippetDirectories="~/.vim/bundle/vim-snippets/snippets"
+let g:UltiSnipsSnippetDirectories = ['~/.vim/bundle/vim-snippets/snippets', 'UltiSnips']
+
 "#FuzzyFinder
-map <leader>F :FufFile<CR>
-map <leader>f :FufTaggedFile<CR>
-map <leader>s :FufTag<CR>
-map <leader>b :FufBuffer<CR>
+"let g:fzf_command_prefix = 'Fzf'
+map <leader>F :Files<CR>
+map <leader>s :Tags<CR>
+map <leader>S :BTags<CR>
+map <leader>b :Buffers<CR>
 
 " AutoClose
 let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'", '#{': '}'} 
 let g:AutoCloseProtectedRegions = ["Character"] 
 
 let my_home = expand("$HOME/")
+
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 "  ---------------------------------------------------------------------------
 "  Ruby/Rails
@@ -174,6 +205,11 @@ map <Leader>sc :RScontroller
 map <Leader>sv :RSview 
 map <Leader>su :RSunittest 
 map <Leader>sf :RSfunctionaltest 
+
+"  ---------------------------------------------------------------------------
+"  Rspc
+"  ---------------------------------------------------------------------------
+let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
 
 " Hide search highlighting
 map <Leader>h :set invhls <CR>
@@ -232,6 +268,29 @@ if filereadable(my_home . '.vimrc.local')
 endif
 
 "  ---------------------------------------------------------------------------
+"  Node / React / JSX
+"  ---------------------------------------------------------------------------
+" grant plugin on file with other than .jsx extension
+let g:jsx_ext_required = 0
+let g:javascript_plugin_flow = 1
+
+
+"  ---------------------------------------------------------------------------
+" Syntastic 
+"  ---------------------------------------------------------------------------
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
+let g:syntastic_ruby_mri_args = "-W1"
+
+
+"  ---------------------------------------------------------------------------
 "  Misc
 "  ---------------------------------------------------------------------------
 "
@@ -282,6 +341,20 @@ function! ShowFunc(sort)
   let &grepformat = gf_s
   let &grepprg = gp_s
 endfunc
+
+
+
+"http://stackoverflow.com/questions/5686206/search-replace-using-quickfix-list-in-vim/5686810#5686810
+"Append quickfix results to args
+command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
+function! QuickfixFilenames()
+  " Building a hash ensures we get each buffer only once
+  let buffer_numbers = {}
+  for quickfix_item in getqflist()
+    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+  endfor
+  return join(values(buffer_numbers))
+endfunction
 
 
 " When vimrc, either directly or via symlink, is edited, automatically reload it

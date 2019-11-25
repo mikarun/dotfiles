@@ -1,0 +1,4 @@
+--exclude=.git
+--exclude=log
+--exclude=tmp
+--options=/Users/mickael/.ctags-patterns/javascript.ctagsrc 
