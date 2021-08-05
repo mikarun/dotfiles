@@ -1,2 +1,3 @@
 .vagrant/
 brew
+.DS_Store
