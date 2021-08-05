@@ -41,6 +41,7 @@ DOTFILES=~/dotfiles
 WITH_BASH=""
 WITH_ZSH=""
 WITH_VIM=""
+WITH_NVIM=""
 WITH_TMUX=""
 WITH_GIT=""
 
@@ -115,6 +116,8 @@ OPTIONS
         mikarun's ZSH / Oh-My-ZSH configuration ~/.oh-my-zsh/ ~/.zshrc
     --emacs --with-emacs
         mikarun's Emacs configuration ~/.emacs ~/.emacs.d/
+    --nvim --with-nvim
+        mikarun's nvim configuration ~/.config/init.vim
     --vim --with-vim
         mikarun's VIM configuration ~/.vimrc
     --git --with-git
@@ -375,6 +378,16 @@ EOF
 }
 
 
+install_neovim() {
+    check_bin zsh
+    check_bin brew
+    if [ ! -d "$HOME/.config/" ]; then
+        info "installing neovim -- see http://ohmyz.sh/"
+        [ -z "${SIMULATION}" ] && sh -c "$(brew install neovim)"
+    fi
+    add_or_remove_copy  $DOTFILES/nvim/init.vim       ~/.config/nvim/init.vim
+    add_or_remove_copy  $DOTFILES/nvim/vimrc ~/.vimrc
+}
 ################################################################################
 ################################################################################
 # Let's go
@@ -398,12 +411,14 @@ while [ $# -ge 1 ]; do
         --with-bash  | --bash)   WITH_BASH='--with-bash';;
         --with-zsh   | --zsh)    WITH_ZSH='--with-zsh';;
         --with-vim   | --vim)    WITH_VIM='--with-vim';;
+        --with-nvim  | --nvim)    WITH_nvim='--with-nvim';;
         --with-git   | --git)    WITH_GIT='--with-git';;
         --with-tmux| --tmux) WITH_TMUX='--with-tmux';;
         -a | --all)
             WITH_BASH='--with-bash';
             WITH_ZSH='--with-zsh';
             WITH_VIM='--with-vim';
+            WITH_NVIM='--with-nvim';
             WITH_GIT='--with-git';
             WITH_TMUX='--with-tmux';;
     esac
@@ -479,6 +494,15 @@ if [ -n "${WITH_VIM}" ]; then
             warning "After Neobundle installation and vim relaunch, you might encounter the bug #156"
             warning "        https://github.com/avelino/vim-bootstrap/issues/156"
         fi
+    fi
+fi
+
+## neovimd (nvim)
+if [ -n "${WITH_NVIM}" ]; then
+    info "${ACTION} mikarun's NVIM configuration ~/.config/init.vim"
+    add_or_remove_link "${DOTFILES}/nvim/config/init.vim" ~/.config/init.vim
+    if  [ "${MODE}" != "--delete" ]; then
+        install_neovim
     fi
 fi
 
