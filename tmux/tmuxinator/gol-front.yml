@@ -40,7 +40,7 @@ root: ~/Repositories/git.tableonline.fr/guestonline-front
 # attach: false
 
 windows:
-  - editor: vim
+  - editor: nvim
   - server: 
       layout: even-horizontal
       panes:

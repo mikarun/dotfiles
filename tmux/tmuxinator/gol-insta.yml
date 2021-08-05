@@ -1,7 +1,7 @@
 # /Users/mickael/.config/tmuxinator/gol-web.yml
 
-name: gol-web
-root: ~/Repositories/git.tableonline.fr/guestonline-web
+name: gol-insta
+root: ~/Repositories/git.tableonline.fr/instabook
 
 # Optional tmux socket
 # socket_name: foo
