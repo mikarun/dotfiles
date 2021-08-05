@@ -40,11 +40,9 @@ DOTFILES=~/dotfiles
 # What to take care of (default is empty)
 WITH_BASH=""
 WITH_ZSH=""
-WITH_EMACS=""
 WITH_VIM=""
 WITH_TMUX=""
 WITH_GIT=""
-WITH_SCREEN=""
 
 #######################
 ### print functions ###
@@ -399,18 +397,14 @@ while [ $# -ge 1 ]; do
             shift;       DOTFILES=$1;;
         --with-bash  | --bash)   WITH_BASH='--with-bash';;
         --with-zsh   | --zsh)    WITH_ZSH='--with-zsh';;
-        --with-emacs | --emacs)  WITH_EMACS='--with-emacs';;
         --with-vim   | --vim)    WITH_VIM='--with-vim';;
         --with-git   | --git)    WITH_GIT='--with-git';;
-        --with-screen| --screen) WITH_SCREEN='--with-screen';;
         --with-tmux| --tmux) WITH_TMUX='--with-tmux';;
         -a | --all)
             WITH_BASH='--with-bash';
             WITH_ZSH='--with-zsh';
-            WITH_EMACS='--with-emacs';
             WITH_VIM='--with-vim';
             WITH_GIT='--with-git';
-            WITH_SCREEN='--with-screen';
             WITH_TMUX='--with-tmux';;
     esac
     shift
@@ -441,7 +435,7 @@ fi
 
 cd ~
 
-if [ -z "${WITH_BASH}${WITH_ZSH}${WITH_EMACS}${WITH_VIM}${WITH_GIT}${WITH_SCREEN}${WITH_TMUX}" ]; then
+if [ -z "${WITH_BASH}${WITH_ZSH}${WITH_VIM}${WITH_GIT}${WITH_TMUX}" ]; then
     warning " "
     warning "By default, this installer does nothing except updating ${DOTFILES}."
     warning "Use '$0 --all' to install all available configs. OR use a discrete set of options."
@@ -475,15 +469,6 @@ if [ -n "${WITH_ZSH}" ]; then
     fi
 fi
 
-## GNU Emacs
-if [ -n "${WITH_EMACS}" ]; then
-    info "${ACTION} mikarun's Emacs configuration ~/.emacs ~/.emacs.d"
-    warning "For performance reason, make this installation independently following instructions on"
-    warning "    https://github.com/mikarun/emacs-config2 "
-    # add_or_remove_link   $DOTFILES/emacs     ~/.emacs.d
-    # add_or_remove_link   ~/.emacs.d/.emacs   ~/.emacs
-fi
-
 ## VI iMproved ([m]Vim)
 if [ -n "${WITH_VIM}" ]; then
     info "${ACTION} mikarun's VIM configuration ~/.vimrc"
@@ -515,10 +500,4 @@ if [ -n "${WITH_GIT}" ]; then
     else
         add_or_remove_copy ' ' ~/.gitconfig.local
     fi
-fi
-
-## GNU Screen
-if [ -n "${WITH_SCREEN}" ]; then
-    info "${ACTION} ULHPC GNU Screen configuration ~/.screenrc"
-    add_or_remove_link "${DOTFILES}/screen/.screenrc" ~/.screenrc
 fi
