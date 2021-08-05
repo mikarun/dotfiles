@@ -21,7 +21,7 @@ export ZSH_THEME="mika"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vi-mode rails rake-fast capistrano git git-flow gol docker docker-compose kubernetes)
+plugins=(vi-mode rails rake-fast capistrano git gitfast git-flow gol docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 source ~/.alias
