@@ -381,13 +381,43 @@ EOF
 install_neovim() {
     check_bin zsh
     check_bin brew
-    if [ ! -d "$HOME/.config/" ]; then
-        info "installing neovim -- see http://ohmyz.sh/"
-        [ -z "${SIMULATION}" ] && sh -c "$(brew install neovim)"
+    if [ ! -d "$HOME/.config/nvim" ]; then
+        info "installing neovim -- see https://github.com/neovim/neovim/wiki/Installing-Neovim"
+        [ -z "${SIMULATION}" ] && sh -c "$(brew install --HEAD neovim)"
     fi
-    add_or_remove_copy  $DOTFILES/nvim/init.vim       ~/.config/nvim/init.vim
+    info "${ACTION} mikarun's nvim configuration ~/.config/nvim/init.vim"
+    add_or_remove_link "${DOTFILES}/nvim/config" ~/.config/nvim
     add_or_remove_copy  $DOTFILES/nvim/vimrc ~/.vimrc
 }
+
+install_neovim_plug() {
+  check_bin zsh
+  if [ ! -d "$HOME/.vim/autoload/" ]; then
+      info "installing Oh-My-ZSH -- see http://ohmyz.sh/"
+      # installation by curl if available
+      if   [ -n "`which curl`" ]; then
+          echo "   - install vim plug"
+            warning " "
+            warning "Remember to run :PlugInstall to continue the installation!!!"
+            warning "Python3 and nodejs should be requested!!!"
+            warning " "
+          [ -z "${SIMULATION}" ] && sh -c "$(curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+                https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim)"
+      else
+          print_error_and_exit "Unable to install oh-my-zsh/. You shall install 'curl' or 'wget' on your system"
+      fi
+  fi
+  }
+
+install_tmux() {
+  check_bin zsh
+  check_bin brew
+  if [ ! -f "$HOME/.tmux.conf" ]; then
+      info "installing tmux"
+      [ -z "${SIMULATION}" ] && sh -c "$(brew install tmux)"
+  fi
+  }
+
 ################################################################################
 ################################################################################
 # Let's go
@@ -411,7 +441,7 @@ while [ $# -ge 1 ]; do
         --with-bash  | --bash)   WITH_BASH='--with-bash';;
         --with-zsh   | --zsh)    WITH_ZSH='--with-zsh';;
         --with-vim   | --vim)    WITH_VIM='--with-vim';;
-        --with-nvim  | --nvim)    WITH_nvim='--with-nvim';;
+        --with-nvim  | --nvim)    WITH_NVIM='--with-nvim';;
         --with-git   | --git)    WITH_GIT='--with-git';;
         --with-tmux| --tmux) WITH_TMUX='--with-tmux';;
         -a | --all)
@@ -450,7 +480,7 @@ fi
 
 cd ~
 
-if [ -z "${WITH_BASH}${WITH_ZSH}${WITH_VIM}${WITH_GIT}${WITH_TMUX}" ]; then
+if [ -z "${WITH_BASH}${WITH_ZSH}${WITH_VIM}${WITH_NVIM}${WITH_GIT}${WITH_TMUX}" ]; then
     warning " "
     warning "By default, this installer does nothing except updating ${DOTFILES}."
     warning "Use '$0 --all' to install all available configs. OR use a discrete set of options."
@@ -500,14 +530,18 @@ fi
 ## neovimd (nvim)
 if [ -n "${WITH_NVIM}" ]; then
     info "${ACTION} mikarun's NVIM configuration ~/.config/init.vim"
-    add_or_remove_link "${DOTFILES}/nvim/config/init.vim" ~/.config/init.vim
+    #add_or_remove_link "${DOTFILES}/nvim/init.vim" ~/.config/nvim/init.vim
     if  [ "${MODE}" != "--delete" ]; then
         install_neovim
+        install_neovim_plug
     fi
 fi
 
 ## Tmux
 if [ -n "${WITH_TMUX}" ]; then
+    if [ "${MODE}" != "--delete" ]; then
+      install_tmux
+    fi
     info "${ACTION} mikarun's Tmux configuration ~/.tmux.conf"
     add_or_remove_link "${DOTFILES}/tmux/.tmux.conf" ~/.tmux.conf
     info "${ACTION} mikarun's Tmuxinator configuration ~/.config/tmuxinator"
