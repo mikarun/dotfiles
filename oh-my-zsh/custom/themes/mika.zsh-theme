@@ -6,12 +6,39 @@
 # PROMPT=$'%{\e[0;34m%}%B┌─[%b%{\e[0m%}%{\e[1;32m%}%n%{\e[1;30m%}@%{\e[0m%}%{\e[0;36m%}%m%{\e[0;34m%}%B]%b%{\e[0m%} - %b%{\e[0;34m%}%B[%b%{$fg_no_bold[red]%}%~%{\e[0;34m%}%B]%b%{\e[0m%}
 # %{\e[0;34m%}%B└─%B[%{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}$(svn_prompt_info)%{$reset_color%}%{\e[0;34m%}%B]>%{\e[0m%}%b '
 
-function docker_machine_name() {
-  if test ${DOCKER_MACHINE_NAME}; then
-    local format=${1:-%s}
-    printf -- "${format}" "${DOCKER_MACHINE_NAME}"
+function __docker_context_name() {
+  if type "docker" > /dev/null; then
+    echo $(docker context show);
   fi
+  return 
 }
+
+function docker_machine_name() {
+  local format=${1:-%s}
+
+  if test ${DOCKER_MACHINE_NAME}; then
+    printf -- "${format}" "${DOCKER_MACHINE_NAME}"
+    return
+  fi
+
+  local docker_ctx=$(__docker_context_name);
+  if [[ ! "$docker_ctx" = "default" ]]; then
+    printf -- "${format}" "$docker_ctx"
+    return
+  fi
+
+}
+
+function test_equality(){
+  local varname="a"
+  echo "$varname"
+  if [[ ! "$varname" = "d" ]]; then
+    echo "equals 1"
+    else
+      echo "$varname"
+    fi
+}
+
 
 setopt prompt_subst
 
