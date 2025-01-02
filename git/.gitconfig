@@ -17,10 +17,12 @@
   plog =  log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [core]
   whitespace = trailing-space,space-before-tab
-	editor = /usr/local/bin/vim
+  editor = /opt/homebrew/bin/nvim
 [apply]
   #whitespace = trailing-space,space-before-tab
 [push]
 	default = current
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[init]
+	defaultBranch = main
