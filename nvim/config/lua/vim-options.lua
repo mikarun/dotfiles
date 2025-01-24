@@ -1,9 +1,9 @@
 -- ---------------------------------------------------------------------------
 --  General
 -- ---------------------------------------------------------------------------
-vim.cmd("let mapleader = ','")
+vim.cmd("let mapleader = ' '")
 --vim.cmd("let g:mapleader = ','")
-vim.g.mapleader = ","
+vim.g.mapleader = " "
 
 vim.cmd("filetype plugin indent on")
 vim.cmd("set modelines=0")
@@ -15,7 +15,6 @@ vim.cmd("syntax enable")
 vim.cmd("set autoread")
 vim.cmd("set clipboard=unnamed")
 
-
 -- ---------------------------------------------------------------------------
 --  Text Formatting
 -- ---------------------------------------------------------------------------
@@ -24,7 +23,6 @@ vim.cmd("set tabstop=2")
 vim.cmd("set shiftwidth=2")
 vim.cmd("set softtabstop=2")
 vim.cmd("set tags:tags,./tmp/tags;")
-
 
 -- ---------------------------------------------------------------------------
 -- UI
@@ -64,10 +62,8 @@ vim.cmd("set incsearch")
 vim.cmd("set showmatch")
 vim.cmd("set hlsearch")
 
-
-
 -- Edit/View files relative to current directory
 --vim.cmd("cnoremap %% <C-R>=expand('%:h').'/'<cr>")
-vim.keymap.set('n', '<leader>E', ':Explore')
-vim.keymap.set('n', '<leader>e', ':e <C-R>=expand("%:p:h") . "/" <CR>')
-vim.keymap.set('n', '<leader>v', ':view %%')
+vim.keymap.set("n", "<leader>E", ":Explore")
+vim.keymap.set("n", "<leader>e", ':e <C-R>=expand("%:p:h") . "/" <CR>')
+vim.keymap.set("n", "<leader>v", ":view %%")
