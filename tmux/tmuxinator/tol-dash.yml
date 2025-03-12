@@ -1,7 +1,7 @@
 # /Users/mickael/.config/tmuxinator/gol-web.yml
 
 name: tol-dash
-root: ~/Repositories/git.tableonline.fr/tol-dashboard
+root: ~/Repositories/git.tableonline.fr/tableonline/tol-dashboard
 
 # Optional tmux socket
 # socket_name: foo
@@ -40,9 +40,9 @@ root: ~/Repositories/git.tableonline.fr/tol-dashboard
 # attach: false
 
 windows:
-  - editor: vim
+  - editor: nvim
   - server: 
       layout: even-horizontal
       panes:
-        - gole_fr
-        - gole_fr
+        - gole_dev
+        - gole_dev

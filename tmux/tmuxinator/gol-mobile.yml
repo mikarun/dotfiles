@@ -1,7 +1,7 @@
 # /Users/mickael/.config/tmuxinator/gol-web.yml
 
-name: tol-pro
-root: ~/Repositories/git.tableonline.fr/tableonline/tableonline-pro
+name: gol-front
+root: ~/Repositories/git.tableonline.fr/gol-front-migration/Guestonline
 
 # Optional tmux socket
 # socket_name: foo

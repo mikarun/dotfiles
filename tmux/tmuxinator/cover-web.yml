@@ -1,7 +1,7 @@
 # /Users/mickael/.config/tmuxinator/gol-web.yml
 
-name: tol-pro
-root: ~/Repositories/git.tableonline.fr/tableonline/tableonline-pro
+name: cover-web
+root: ~/Repositories/covermanager.com/covermanager
 
 # Optional tmux socket
 # socket_name: foo
