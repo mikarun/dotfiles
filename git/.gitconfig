@@ -11,9 +11,10 @@
   cm = commit -m
   cma = !git add -A && git commit -m
   up = !git pull --rebase --prune $@
+  tree = log --graph --decorate --pretty=oneline --abbrev-commit
+  lol = log --oneline --decorate
   # clean branch merged on master
   bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
-	tree = log --graph --decorate --pretty=oneline --abbrev-commit
   plog =  log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [core]
   whitespace = trailing-space,space-before-tab
