@@ -89,7 +89,29 @@ return {
 
       -- You can provide additional configuration to the handlers,
       -- see mason-nvim-dap README for more information
-      handlers = {},
+      -- handlers = {},
+      handlers = {
+        function(config)
+          require("mason-nvim-dap").default_setup(config)
+        end,
+        php = function(config)
+          config.configurations = {
+            {
+              type = "php",
+              request = "launch",
+              name = "Listen for XDebug",
+              port = 9003,
+              log = true,
+              pathMappings = {
+                ["/var/www/html/"] = vim.fn.getcwd() .. "/",
+              },
+              hostname = "0.0.0.0",
+            },
+          }
+
+          require("mason-nvim-dap").default_setup(config) -- don't forget this!
+        end,
+      },
 
       -- You'll need to check that you have the required things installed
       -- online, please don't ask me how to install them :)
@@ -99,11 +121,11 @@ return {
       },
     })
 
-    dap.adapters.php = {
-      type = "executable",
-      command = "node",
-      args = { "/Users/mickael/.vscode/extensions/xdebug.php-debug-1.35.0/out/phpDebug.js" },
-    }
+    --dap.adapters.php = {
+    --  type = "executable",
+    --  command = "node",
+    --  args = { "/Users/mickael/.vscode/extensions/xdebug.php-debug-1.36.1/out/phpDebug.js" },
+    --}
 
     dap.listeners.before.launch.dapui_config = function()
       -- when the debugger is launched open up the debug ui

@@ -7,6 +7,7 @@ return {
 		-- tag = "0.1.8",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
+			"davvid/telescope-git-grep.nvim",
 			{
 				"nvim-telescope/telescope-fzf-native.nvim",
 				build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
@@ -23,6 +24,7 @@ return {
 			})
 
 			require("telescope").load_extension("fzf")
+			require("telescope").load_extension("git_grep")
 
 			local builtin = require("telescope.builtin")
 			--vim.keymap.set("n", "<C-p>", builtin.find_files, {})
@@ -36,15 +38,25 @@ return {
 			vim.keymap.set("n", "<leader>fs", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 			vim.keymap.set("n", "<leader>fp", builtin.lsp_document_symbols, { desc = "[S]earch [S]ymbol Telescope" })
 			vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-			--vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+			vim.keymap.set("n", "<leader>fl", builtin.live_grep, { desc = "[S]earch by [G]rep" })
 			vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 			vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[S]earch [R]esume" })
 			vim.keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 
+			-- Search for the current word in your current worktree
+			vim.keymap.set({ "n", "v" }, "<leader>fG", function()
+				require("git_grep").grep()
+			end, { desc = "[F]ind [G]it [Grep] current world" })
+
+			-- Interactively search for a pattern in your current worktree
+			vim.keymap.set("n", "<leader>fg", function()
+				require("git_grep").live_grep()
+			end, { desc = "[F]ind [G]it [Grep]" })
+
 			require("telescope").load_extension("ui-select")
 
-			require("config.telescope.multigrep").setup()
+			--require("config.telescope.multigrep").setup()
 		end,
 	},
 }
