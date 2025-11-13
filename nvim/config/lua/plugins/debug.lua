@@ -17,6 +17,7 @@ return {
     -- Installs the debug adapters for you
     "williamboman/mason.nvim",
     "jay-babu/mason-nvim-dap.nvim",
+    "jbyuki/one-small-step-for-vimkind",
   },
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
@@ -80,6 +81,18 @@ return {
     local dap = require("dap")
     local dapview = require("dap-view")
 
+    dap.configurations.lua = {
+      {
+        type = "nlua",
+        request = "attach",
+        name = "Attach to running Neovim instance",
+      },
+    }
+
+    dap.adapters.nlua = function(callback, config)
+      callback({ type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 })
+    end
+
     require("mason").setup()
 
     require("mason-nvim-dap").setup({
@@ -131,6 +144,10 @@ return {
       -- when the debugger is launched open up the debug ui
       dapview.open()
     end
+    --start lua debugger
+    vim.keymap.set("n", "<leader>dl", function()
+      require("osv").launch({ port = 8086 })
+    end, { noremap = true })
 
     -- set a vim motion for <Space> + d + t to toggle a breakpoint at the line where the cursor is currently on
     vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint, { desc = "[D]ebug [T]oggle Breakpoint" })
