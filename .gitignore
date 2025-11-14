@@ -1,3 +1,5 @@
 .vagrant/
 brew
 .DS_Store
+tmux/plugins
+tmux/*.log
