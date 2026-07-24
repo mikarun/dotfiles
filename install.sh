@@ -630,7 +630,7 @@ __screen() {
 }
 ## HomeBrew -- http://brew.sh
 __brew() {
-  [ -z "${WITH_BREW}" -o "$(uname -s)" == "Darwin" -o "${ACTION}" != "install" ] && return
+  [ -z "${WITH_BREW}" -o "$(uname -s)" != "Darwin" -o "${ACTION}" != "install" ] && return
   [ -z "$(which brew)" ] && return
   brewfile="${INSTALL_DIR}/brew/Brewfile"
   [ ! -f "${brewfile}" ] && print_error_and_exit "Unable to find the Brew file '${brewfile}'"
