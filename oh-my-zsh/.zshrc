@@ -4,9 +4,34 @@
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+# -*- mode:sh; -*-
+###############################################################################
+#              __ ___  _           __  __      __ _________  _   _
+#             | _/ _ \| |__       |  \/  |_   |_ |__  / ___|| | | |
+#             | | | | | '_ \ _____| |\/| | | | | | / /\___ \| |_| |
+#             | | |_| | | | |_____| |  | | |_| | |/ /_ ___) |  _  |
+#             | |\___/|_| |_|     |_|  |_|\__, | /____|____/|_| |_|
+#             |__|                        |___/__|
+#
+###############################################################################
+# Resources:
+# - https://github.com/smaximov/zsh-config
+#
+# You SHOULD have made `~/.zshenv` a symbolic link pointing to
+# `$ZDOTDIR/.zshenv` as follow:
+#
+#           ln -s .config/zsh/.zshenv ~/.zshenv
+#
+# This ensure all expected environment variable (in particular the ones of
+# XDG Base Directory Specification (see https://specifications.freedesktop.org/basedir-spec/latest/)
+# are set
+###############################################################################
 
-# Path to your oh-my-zsh configuration.
-export ZSH=$HOME/.oh-my-zsh
+# Path to your oh-my-zsh installation.
+export ZSH=$XDG_DATA_HOME/oh-my-zsh
+
+# Custom directory location
+ZSH_CUSTOM=$ZDOTDIR/custom
 
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -28,7 +53,36 @@ export ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vi-mode rails rake-fast capistrano git gitfast git-flow gol docker docker-compose kubectl)
+#plugins=(vi-mode rails rake-fast capistrano git gitfast git-flow gol docker docker-compose kubectl)
+
+# === Oh-My-ZSH Plugins ===
+plugins=()
+# Add them wisely, as too many plugins slow down shell startup.
+#___________________
+# - Default plugins: '$ZSH/plugins/*' i.e. ~/.local/share/oh-my-zsh/plugins/*
+#   See https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins
+plugins+=(vi-mode)
+plugins+=(git gitfast git-flow git-extras)  # Git
+plugins+=(rails rake-fast capistrano)         # Ruby stuff
+#plugins+=(pip)                  # Python stuff
+plugins+=(docker docker-compose)        # Docker stuff
+plugins+=(kubectl minikube)             # Kubernetes stuff
+#if [[ "$(uname)" == "Darwin" ]]; then
+#  plugins+=(macos marked2)        # Mac OS
+#fi
+# Misc
+plugins+=(cp taskwarrior)
+plugins+=(zsh-ssh)
+
+#__________________
+# - Custom plugins: '$ZSH_CUSTOM/plugins/*' i.e. ~/config./zsh/custom/plugins/
+#
+plugins+=(gol)
+
+##############################################################################
+
+# Create ZSH cache directory unless it already exists
+[[ -d $ZSH_CACHE_DIR ]] || mkdir -p $ZSH_CACHE_DIR
 
 source $ZSH/oh-my-zsh.sh
 source ~/.alias
