@@ -572,13 +572,13 @@ __zsh() {
       execute "git clone ${OH_MY_ZSH_REPO} ${omzsh_dir}" || print_error_and_exit "Unable to install oh-my-zsh/. Check your network connection"
     fi
     # Powerlevel10k should be a submodule of the dotfile
-    if [ ! -f "${powerlevel10k_themedir}/.git" ]; then
-      echo "=> '${powerlevel10k_themedir}/.git'"
-      echo $(test -d "${powerlevel10k_themedir}/.git")
-      info "updating (expected) git submodule for powerlevel10k theme"
-      execute "cd ${PREFIX_HOME}${INSTALL_DIR} && git submodule init"
-      execute "cd ${PREFIX_HOME}${INSTALL_DIR} && git submodule update"
-    fi
+    #if [ ! -f "${powerlevel10k_themedir}/.git" ]; then
+    #  echo "=> '${powerlevel10k_themedir}/.git'"
+    #  echo $(test -d "${powerlevel10k_themedir}/.git")
+    #  info "updating (expected) git submodule for powerlevel10k theme"
+    #  execute "cd ${PREFIX_HOME}${INSTALL_DIR} && git submodule init"
+    #  execute "cd ${PREFIX_HOME}${INSTALL_DIR} && git submodule update"
+    #fi
     __change_user_shell 'zsh'
   else
     [ -d "${omzsh_dir}" ] && execute "rm -rf ${omzsh_dir}" || true
