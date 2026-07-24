@@ -87,7 +87,7 @@ plugins+=(gol)
 source $ZSH/oh-my-zsh.sh
 source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 source ~/.alias
-source ~/dotfiles/tmux/tmuxinator.zsh
+source ~/.config/dotfiles/tmux/tmuxinator.zsh
 
 # Customize to your needs...
 unsetopt auto_name_dirs
@@ -109,10 +109,10 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init -)"
 
 # Added by Amplify CLI binary installer
-export PATH="$HOME/.amplify/bin:$PATH"
+#export PATH="$HOME/.amplify/bin:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
 # Mise
 eval "$(/Users/mickael/.local/bin/mise activate zsh)"
