@@ -15,11 +15,11 @@ Installation of [Git](http://git-scm.com/) is relatively simple (actually it com
 
 ### Linux / Mac OS
 
-~~~bash
-$> apt-get install git-core git-flow # On Debian-like systems
-$> yum install git gitflow           # On CentOS-like systems
-$> brew install git git-flow         # On Mac OS, using [Homebrew](http://mxcl.github.com/homebrew/)
-~~~
+```bash
+$ apt install git git-flow      # On Debian-like systems
+$ yum install git gitflow       # On CentOS-like systems
+$ brew install git git-flow     # On Mac OS, using [Homebrew](http://mxcl.github.com/homebrew/)
+```
 
 ### Windows
 
@@ -33,28 +33,33 @@ Use [git-for-windows](https://git-for-windows.github.io/), which includes Git Ba
 
 The way I organize my git configurations is as follows:
 
-| File                 | Visibility | Description                                        |
-|----------------------|------------|----------------------------------------------------|
-| `~/.gitconfig`       | Public     | general aliases and core/colors configurations     |
-| `~/.gitconfig.local` | Private    | username / credentials / private business etc. |
-|                      |            |                                                    |
+| File                         | Alternative          | Visibility | Description                                    |
+|------------------------------|----------------------|------------|------------------------------------------------|
+| `~/.config/git/config`       | `~/.gitconfig`       | Public     | general aliases and core/colors configurations |
+| `~/.config/git/config.local` | `~/.gitconfig.local` | Private    | username / credentials / private business etc. |
 
 Note that this hierarchy assume the availability of the `include.path` directive within Git which was introduced in __Git >= 1.7.10__ (see <http://git-scm.com/docs/git-config#_includes>)
+A sample `config.local.example` is provided that you can inspire to create your own (not-tracked) `config.local` file.
 
 ## Installation for Falkor's Git configuration
 
 You can use the `install.sh` script featured with the [Falkor's dotfile](https://github.com/Falkor/dotfile) repository.
 
 ``` bash
-$> cd ~/.dotfiles.falkor.d
-$> ./install.sh --git     # OR ./install.sh --with-git
+$ cd ~/.config/dotfiles.falkor.d
+$ ./install.sh --git     # OR ./install.sh --with-git
+# Copy and adapt local configuration
+$ cd ~/.config/git/
+$ cp ~/.config/dotfiles.falkor.d/git/config.local.example  config.local
+$ vim ~/.config/git/config.local
+# /!\ ADAPT name , email etc.
 ```
 
 ## Uninstall
 
 ``` bash
-$> cd ~/.dotfiles.falkor.d
-$> ./install.sh --delete --git
+$ cd ~/.config/dotfiles.falkor.d
+$ ./install.sh --delete --git
 ```
 
 ## Resources
@@ -65,3 +70,4 @@ Consider these resources to become more familiar (if not yet) with Git:
 * [Git book](http://book.git-scm.com/index.html)
 * [Github:help](http://help.github.com/mac-set-up-git/)
 * [Git reference](http://gitref.org/)
+* [Git Cheat Sheet](https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf) proposed on Github.
