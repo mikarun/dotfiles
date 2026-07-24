@@ -1,7 +1,7 @@
 # /Users/mickael/.config/tmuxinator/lp.yml
 
 name: copilot
-root: ~/Repositories/git.tableonline.fr/guestonline/copilot
+root: ~/Repositories/github.com/zenchef/gol-migration-api
 
 # Optional tmux socket
 # socket_name: foo
@@ -45,9 +45,14 @@ root: ~/Repositories/git.tableonline.fr/guestonline/copilot
 # attach: false
 
 windows:
-  - editor: nvim
+  - copilot: nvim
   - server:
       layout: even-horizontal
       panes:
         - date
         - date
+
+  - api-migration-php: zc_mig && nvim
+  - mig-server: zc_mig
+  - api.zenchef.com: zc_api && nvim
+  - api-server: zc_api
