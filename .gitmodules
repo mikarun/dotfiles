@@ -54,6 +54,3 @@
 [submodule "tests/helpers/assertions"]
 	path = tests/helpers/assertions
 	url = https://github.com/jasonkarns/bats-assert
-[submodule "oh-my-zsh/custom/themes/oh-my-zsh/custom/themes/powerlevel10k"]
-	path = oh-my-zsh/custom/themes/oh-my-zsh/custom/themes/powerlevel10k
-	url = https://github.com/romkatv/powerlevel10k.git

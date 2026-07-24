@@ -36,7 +36,7 @@ ZSH_CUSTOM=$ZDOTDIR/custom
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
 #export ZSH_THEME="mika"
-export ZSH_THEME="powerlevel10k/powerlevel10k"
+#export ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # export ZSH_THEME_SVN_PROMPT_DIRTY="?"
 
@@ -85,6 +85,7 @@ plugins+=(gol)
 [[ -d $ZSH_CACHE_DIR ]] || mkdir -p $ZSH_CACHE_DIR
 
 source $ZSH/oh-my-zsh.sh
+source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 source ~/.alias
 source ~/dotfiles/tmux/tmuxinator.zsh
 
