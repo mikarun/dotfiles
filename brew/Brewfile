@@ -21,6 +21,7 @@ brew 'mas'
 brew 'sqlite'
 brew 'python'
 brew "powerlevel10k"
+brew "rbenv"
 brew 'terminal-notifier'
 brew 'tig'
 brew 'vim'

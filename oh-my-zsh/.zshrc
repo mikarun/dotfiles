@@ -71,8 +71,7 @@ plugins+=(kubectl minikube)             # Kubernetes stuff
 #  plugins+=(macos marked2)        # Mac OS
 #fi
 # Misc
-plugins+=(cp taskwarrior)
-plugins+=(zsh-ssh)
+plugins+=(gol)
 
 #__________________
 # - Custom plugins: '$ZSH_CUSTOM/plugins/*' i.e. ~/config./zsh/custom/plugins/
@@ -101,12 +100,15 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 #rbenv
-eval "$(rbenv init -)"
+if which rbenv; then
+  eval "$(rbenv init -)";
+fi
+#eval "$(rbenv init -)"
 
 #pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+#export PYENV_ROOT="$HOME/.pyenv"
+#[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+#eval "$(pyenv init -)"
 
 # Added by Amplify CLI binary installer
 #export PATH="$HOME/.amplify/bin:$PATH"
