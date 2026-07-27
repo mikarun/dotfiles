@@ -40,10 +40,10 @@
 	path = .submodules/gitstats
 	url = https://github.com/hoxu/gitstats.git
 	branch = master
-[submodule ".submodules/Makefiles"]
-	path = .submodules/Makefiles
-	url = https://github.com/Falkor/Makefiles.git
-	branch = devel
+#[submodule ".submodules/Makefiles"]
+#	path = .submodules/Makefiles
+#	url = https://github.com/Falkor/Makefiles.git
+#	branch = devel
 [submodule "oh-my-zsh/custom/plugins/zsh-completions"]
 	path = oh-my-zsh/custom/plugins/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions
@@ -54,3 +54,6 @@
 [submodule "tests/helpers/assertions"]
 	path = tests/helpers/assertions
 	url = https://github.com/jasonkarns/bats-assert
+[submodule "tmux/plugins/tpm"]
+	path = tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm

@@ -1,6 +1,7 @@
 .vagrant/
 .DS_Store
-tmux/plugins
+tmux/plugins/catppuccin/
+tmux/plugins/tmux-*/
 tmux/*.log
 oh-my-zsh/.zcompdump*
 oh-my-zsh/.zsh_history
