@@ -638,7 +638,8 @@ __tmux() {
   [ -z "$(which tmux)" ] && return
   info "${ACTION} tmux configuration ~/.config/tmux/tmux.conf"
   setup_configdir 'tmux'
-  #add_or_remove_link "${PREFIX}/tmux/.tmuxrc" ~/.tmuxrc "${PREFIX_HOME}"
+  #add_or_remove_link "${PREFIX}/tmux/tmuxinator" "tmuxinator" "${PREFIX_HOME}"
+  add_or_remove_link "${DOTFILES_DIR}/tmux/tmuxinator" "~/${PREFIX}/tmuxinator" "${PREFIX}"
   clean_configdir 'tmux'
 }
 ## HomeBrew -- http://brew.sh
@@ -732,10 +733,11 @@ while [ $# -ge 1 ]; do
   --with-vim | --vim) TARGETS+='--vim' ;;
   --with-git | --git) TARGETS+='--git' ;;
   --with-screen | --screen) TARGETS+='--screen' ;;
+  --with-tmux | --tmux) TARGETS+='--tmux' ;;
   --with-brew | --brew) TARGETS+='--brew' ;;
   --with-curl | --curl) TARGETS+='--curl' ;;
   --with-rvm | --rvm) TARGETS+='--curl --rvm' ;;
-  -r | --recommended) TARGETS+='--bash --vim --git --screen --curl' ;;
+  -r | --recommended) TARGETS+='--bash --vim --git --tmux --curl' ;;
   -a | --all) TARGETS+='--bash --brew --zsh --emacs --vim --git --screen --curl --rvm' ;;
   esac
   shift
