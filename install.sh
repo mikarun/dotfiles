@@ -57,6 +57,7 @@ WITH_EMACS=""
 WITH_VIM=""
 WITH_GIT=""
 WITH_SCREEN=""
+WITH_TMUX=""
 WITH_BREW=""
 WITH_CURL=""
 WITH_RVM=""
@@ -148,6 +149,8 @@ OPTIONS
         Falkor's Git configuration gitconfig[.local]
     --screen --with-screen
         Falkor's GNU Screen configuration ~/.screenrc
+    --tmux --with-tmux
+        Tmux configuration ~/.config/tmux/tmux.conf
     --rvm --with-rvm
         Install RVM (Ruby Version Manager)
 
@@ -628,6 +631,16 @@ __screen() {
   add_or_remove_link "${PREFIX}/screen/.screenrc" ~/.screenrc "${PREFIX_HOME}"
   clean_configdir 'screen'
 }
+
+## tmux
+__tmux() {
+  [ -z "${WITH_TMUX}" ] && return
+  [ -z "$(which tmux)" ] && return
+  info "${ACTION} tmux configuration ~/.config/tmux/tmux.conf"
+  setup_configdir 'tmux'
+  #add_or_remove_link "${PREFIX}/tmux/.tmuxrc" ~/.tmuxrc "${PREFIX_HOME}"
+  clean_configdir 'tmux'
+}
 ## HomeBrew -- http://brew.sh
 __brew() {
   [ -z "${WITH_BREW}" -o "$(uname -s)" != "Darwin" -o "${ACTION}" != "install" ] && return
@@ -795,6 +808,10 @@ for target in ${TARGETS}; do
   *shell*)
     WITH_SHELL="$target"
     __shell
+    ;;
+  *tmux*)
+    WITH_TMUX="$target"
+    __tmux
     ;;
   *vim*)
     WITH_VIM="$target"
