@@ -100,10 +100,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 #rbenv
-if which rbenv; then
+if [ ! -z "$(which rbenv)" ]; then
   eval "$(rbenv init -)";
 fi
-#eval "$(rbenv init -)"
 
 #pyenv
 #export PYENV_ROOT="$HOME/.pyenv"
@@ -113,8 +112,12 @@ fi
 # Added by Amplify CLI binary installer
 #export PATH="$HOME/.amplify/bin:$PATH"
 
+# Mise
+#if which mise; then
+if [ ! -z "$(which mise)" ]; then
+eval "$(/Users/mickael/.local/bin/mise activate zsh)"
+fi
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
-# Mise
-eval "$(/Users/mickael/.local/bin/mise activate zsh)"
