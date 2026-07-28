@@ -3,7 +3,7 @@
 # see https://github.com/Falkor/dotfiles
 
 # Pre-configuration for brew sources
-tap "buo/cask-upgrade"
+tap 'buo/cask-upgrade'
 
 # Couple of mandatory applications
 brew 'readline'
@@ -13,21 +13,22 @@ brew 'coreutils'
 brew 'ctags-exuberant'
 brew 'curl'
 brew 'git'
-brew "git-delta"
-brew "git-extras"
-#brew "git-flow-avh"
+brew 'git-delta'
+brew 'git-extras'
+# brew "git-flow-avh"
 brew 'lazygit'
 brew 'lua'
 brew 'mas'
+brew 'mysql-client'
 brew 'sqlite'
 brew 'python'
-brew "powerlevel10k"
-brew "rbenv"
+brew 'powerlevel10k'
+brew 'rbenv'
+brew 'ripgrep'
 brew 'terminal-notifier'
 brew 'tig'
 brew 'vim'
 brew 'wget'
-
 
 # completions
 brew 'bash-completion'
@@ -35,11 +36,11 @@ brew 'brew-cask-completion'
 brew 'zsh-completions'
 
 # Mac GUIs Apps
-cask "iterm2"
+cask 'iterm2'
 
 # Mac Store Apps
-#mas "Xcode", id: 497799835
-#mas 'Slack', id: 803453959
+# mas "Xcode", id: 497799835
+# mas 'Slack', id: 803453959
 
 # Special fonts
 cask 'font-source-code-pro-for-powerline'

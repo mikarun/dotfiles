@@ -599,6 +599,14 @@ __emacs() {
   # add_or_remove_link   $INSTALL_DIR/emacs     ~/.emacs.d
   # add_or_remove_link   ~/.emacs.d/.emacs   ~/.emacs
 }
+# Neo VI iMproved ([m]Vim)
+__nvim() {
+  [ -z "${WITH_VIM}" ] && return
+  info "${ACTION} Falkor's VIM configuration"
+  [ -z "$(which nvim)" ] && return
+  setup_configdir 'nvim'
+  clean_configdir 'nvim'
+}
 # VI iMproved ([m]Vim)
 __vim() {
   [ -z "${WITH_VIM}" ] && return
@@ -817,7 +825,7 @@ for target in ${TARGETS}; do
     ;;
   *vim*)
     WITH_VIM="$target"
-    __vim
+    __nvim
     ;;
   *zsh*)
     WITH_SHELL='--shell'
