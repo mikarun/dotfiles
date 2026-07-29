@@ -79,6 +79,7 @@ export ZSH_CACHE_DIR=$XDG_CACHE_HOME/zsh
 # Store ZSH files under XDG_CONFIG_HOME base directory.
 # This works by symlinking ~/.zshenv to ~/.config/zsh/.zshenv (this file).
 export HISTFILE=$ZSH_CACHE_DIR/zhistory
+export SAVEHIST=100000
 
 # Bugfix titles in tabs under iTerm2 - see https://gitlab.com/gnachman/iterm2/-/issues/8145
 export DISABLE_AUTO_TITLE="true"

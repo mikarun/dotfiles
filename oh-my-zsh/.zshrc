@@ -93,7 +93,7 @@ unsetopt auto_name_dirs
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.config/zsh/.fzf.zsh ] && source ~/.config/zsh/.fzf.zsh
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -103,6 +103,8 @@ export NVM_DIR="$HOME/.nvm"
 if [ ! -z "$(which rbenv)" ]; then
   eval "$(rbenv init -)";
 fi
+
+export SAVEHIST=100000
 
 #pyenv
 #export PYENV_ROOT="$HOME/.pyenv"
